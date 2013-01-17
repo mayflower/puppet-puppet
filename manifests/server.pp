@@ -44,9 +44,8 @@ class puppet::server (
     $bindaddress        = '::',
     $enc                = '',
     $enc_exec           = ''
-  ) {
+  ) inherits puppet {
 
-  include puppet
   include puppet::params
 
   # ---
