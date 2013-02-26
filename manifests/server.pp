@@ -127,20 +127,11 @@ class puppet::server (
         target => "${::puppet::params::puppet_confdir}/config.ru",
         source => $puppetversion ? {
           /^2.7/ => 'puppet:///modules/puppet/config.ru/99-run-2.7.rb',
-          /^3.0/ => 'puppet:///modules/puppet/config.ru/99-run-3.0.rb',
+          /^3.[0|1]/ => 'puppet:///modules/puppet/config.ru/99-run-3.0.rb',
         },
       }
     }
   }
-
-  # Nagios!
-  # FIXME
-  # http://projects.puppetlabs.com/issues/10590
-  # err: Could not retrieve catalog from remote server: Error 400 on SERVER: can't clone TrueClass
-  #
-  # Use a real boolean after hiera 1.0 is out
-  #
-  $monitor_server = hiera('puppet_server_monitor', 'true')
 
   if $monitor_server == 'true' {
     @@nagios_service { "check_puppetmaster_${hostname}":

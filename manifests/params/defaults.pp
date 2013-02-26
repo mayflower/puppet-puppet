@@ -14,7 +14,6 @@ class puppet::params::defaults {
       $puppet_vardir      = '/var/lib/puppet'
       $puppet_ssldir      = '/var/lib/puppet/ssl'
       $puppet_rundir      = '/var/run/puppet'
-      $unicorn_initscript = 'unicorn/initscript_newer.erb'
     }
     'freebsd': {
       $puppet_cmd         = '/usr/local/bin/puppet'
@@ -27,7 +26,6 @@ class puppet::params::defaults {
       $puppet_vardir      = '/var/puppet'
       $puppet_ssldir      = '/var/puppet/ssl'
       $puppet_rundir      = '/var/run/puppet'
-      $unicorn_initscript = 'unicorn/rcscript.erb'
     }
     'darwin': {
       $puppet_cmd     = '/opt/local/bin/puppet'
@@ -53,7 +51,18 @@ class puppet::params::defaults {
       $puppet_vardir      = '/var/lib/puppet'
       $puppet_ssldir      = '/var/lib/puppet/ssl'
       $puppet_rundir      = '/var/run/puppet'
-      $unicorn_initscript = 'unicorn/initscript_newer.erb'
+    }
+    'gentoo': {
+      $puppet_cmd         = '/usr/bin/puppet'
+      $agent_service      = 'puppet'
+      $master_package     = 'app-admin/puppet'
+      $master_service     = 'puppetmaster'
+      $puppet_conf        = '/etc/puppet/puppet.conf'
+      $puppet_confdir     = '/etc/puppet'
+      $puppet_logdir      = '/var/log/puppet'
+      $puppet_vardir      = '/var/lib/puppet'
+      $puppet_ssldir      = '/var/lib/puppet/ssl'
+      $puppet_rundir      = '/var/run/puppet'
     }
 
     # This stops the puppet class breaking. But really, we only have very
@@ -69,6 +78,7 @@ class puppet::params::defaults {
       $puppet_rundir      = '/var/lib/puppet/run/'
       $agent_service      = 'svc:/network/cswpuppetd'
     }
+    default: { fail("Sorry, $operatingsystem is not supported") }
   }
 
   # Behold, the list of platforms that have horrible package mangement!
