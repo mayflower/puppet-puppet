@@ -1,7 +1,7 @@
 # Install the puppetdb terminus. Puppetdb configuration should occur elsewhere.
 class puppet::storeconfig::puppetdb(
-  $server = 'localhost',
-  $port   = '8081',
+  $server = $::puppet::params::puppetdb_server,
+  $port   = $::puppet::params::puppetdb_port,
 ) {
   include puppet::params
 

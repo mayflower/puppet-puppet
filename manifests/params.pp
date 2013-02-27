@@ -15,6 +15,8 @@ class puppet::params(
   $puppet_vardir      = $puppet::params::defaults::puppet_vardir,
   $puppet_ssldir      = $puppet::params::defaults::puppet_ssldir,
   $puppet_rundir      = $puppet::params::defaults::puppet_rundir,
+  $puppetdb_host      = 'localhost',
+  $puppetdb_port      = '8081',
   $unicorn_initscript = $puppet::params::defaults::unicorn_initscript,
 ) inherits puppet::params::defaults {
 
