@@ -10,8 +10,8 @@ ssldir = <%= scope.lookupvar('puppet::params::puppet_ssldir') %>
 rundir = <%= scope.lookupvar('puppet::params::puppet_rundir') %>
 
 <% if operatingsystem == "Ubuntu" -%>
-prerun_command  = /etc/puppet/etckeeper-commit-pre
-postrun_command = /etc/puppet/etckeeper-commit-post
+# prerun_command  = /etc/puppet/etckeeper-commit-pre
+# postrun_command = /etc/puppet/etckeeper-commit-post
 <% end -%>
 
 [agent]
