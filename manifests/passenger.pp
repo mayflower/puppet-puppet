@@ -15,25 +15,20 @@ class puppet::passenger {
     'Debian': {
       include puppet::server::passenger::debian
     }
-
     default: {
       include ruby::dev
-      include apache::ssl
+      include apache::mod::ssl
       include ::passenger
       include passenger::params
-      include ::rack
-
-      file { ['/etc/puppet/rack', '/etc/puppet/rack/public', '/etc/puppet/rack/tmp']:
-          owner  => 'puppet',
-          group  => 'puppet',
-          ensure => directory,
-      }
 
       file { '/etc/puppet/rack/config.ru':
-        owner  => 'puppet',
-        group  => 'puppet',
-        mode   => '0644',
-        source => 'puppet:///modules/puppet/config.ru',
+        owner    => 'puppet',
+        group    => 'puppet',
+        mode     => '0644',
+        source   => $puppetversion ? {
+          /^2.7/ => 'puppet:///modules/puppet/config.ru.passenger.27',
+          /^3./  => 'puppet:///modules/puppet/config.ru.passenger.3',
+        }
       }
 
       apache::vhost{ 'puppetmaster':
