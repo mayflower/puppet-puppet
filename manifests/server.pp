@@ -44,6 +44,7 @@ class puppet::server (
     $bindaddress        = '::',
     $enc                = '',
     $enc_exec           = '',
+    $puppet_version     = hiera('puppet::server::puppet_version', 'present'),
     $monitor_server     = hiera('puppet_server_monitor', 'true'),
     $backup_server      = hiera('puppet_server_backup', 'true')
   ) {
@@ -110,7 +111,7 @@ class puppet::server (
   # ---
   # Used only for platforms that seperate the master and agent packages
   if $puppet::params::master_package != '' {
-    package { $puppet::params::master_package: ensure => present; }
+    package { $puppet::params::master_package: ensure => $puppet_version; }
   }
 
   concat::fragment { 'puppet.conf-master':

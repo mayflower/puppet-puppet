@@ -10,9 +10,9 @@
 #
 # Sample Usage:
 #
-class puppet::server::passenger::debian {
+class puppet::server::passenger::debian ($ensure='present'){
   package { 'puppetmaster-passenger':
-    ensure  => present,
+    ensure  => $ensure,
     require => Apt::Source['puppetlabs']
   }
 
