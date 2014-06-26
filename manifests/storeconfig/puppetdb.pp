@@ -1,7 +1,8 @@
 # Install the puppetdb terminus. Puppetdb configuration should occur elsewhere.
 class puppet::storeconfig::puppetdb(
-  $server = $::puppet::params::puppetdb_server,
-  $port   = $::puppet::params::puppetdb_port,
+  $server  = $::puppet::params::puppetdb_server,
+  $port    = $::puppet::params::puppetdb_port,
+  $version = 'present'
 ) {
   include puppet::params
 
@@ -15,7 +16,7 @@ class puppet::storeconfig::puppetdb(
   }
 
   package { 'puppetdb-terminus':
-    ensure => present,
+    ensure => $version,
     notify => Class['puppet::server'],
   }
 }
